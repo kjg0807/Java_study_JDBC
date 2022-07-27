@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import com.naver.countries.CountriesDAO;
 import com.naver.countries.CountriesDTO;
 import com.naver.countries.CountriesView;
+import com.naver.employe.EmployeDAO;
+import com.naver.employe.EmployeDTO;
+import com.naver.employe.EmployeView;
 import com.naver.regions.RegionsDAO;
 import com.naver.regions.RegionsDTO;
 import com.naver.regions.RegionsView;
@@ -24,19 +27,27 @@ public class TestMain
 		CountriesDTO coutriesDTO = new CountriesDTO();
 		CountriesView coutriesView = new CountriesView();
 
+		EmployeDAO employeDAO = new EmployeDAO();
+		EmployeDTO employeDTO = new EmployeDTO();
+		EmployeView employeView = new EmployeView();
+		
 		try
 		{
 			// DBConnetor_login.getConnection();
 			// rd.getList();
 			// cd.getList();
 			// cd.getDetail("AU");
-//			regionsDTO = rd.getDetail(2);
-//			regionsView.view(regionsDTO);
-			ArrayList<RegionsDTO> ar = rd.getList();
-			regionsView.view(ar);
+			// regionsDTO = rd.getDetail(2);
+			// regionsView.view(regionsDTO);
 
-//			coutriesDTO = cd.getDetail("AU");
-//			coutriesView.view(coutriesDTO);
+			// ArrayList<RegionsDTO> ar = rd.getList();
+			// regionsView.view(ar);
+
+			// coutriesDTO = cd.getDetail("AU");
+			// coutriesView.view(coutriesDTO);
+			
+			ArrayList<EmployeDTO> ar = employeDAO.getList();
+			employeView.view(ar);
 		}
 		catch (Exception e)
 		{
