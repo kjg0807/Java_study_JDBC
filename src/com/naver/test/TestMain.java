@@ -10,7 +10,7 @@ public class TestMain
 
 		try
 		{
-			db.getConnection();
+			DBConnetor_login.getConnection();
 		}
 		catch (Exception e)
 		{
