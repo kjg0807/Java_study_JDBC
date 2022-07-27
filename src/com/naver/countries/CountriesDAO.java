@@ -9,7 +9,7 @@ import com.naver.util.DBConnetor_login;
 
 public class CountriesDAO
 {
-	public void getList() throws Exception
+	public ArrayList<CountriesDTO> getList() throws Exception
 	{
 		// 1. DB연결 - 로그인
 		Connection con = DBConnetor_login.getConnection();
@@ -23,18 +23,20 @@ public class CountriesDAO
 		ArrayList<CountriesDTO> ar = new ArrayList();
 		while (rs.next())
 		{
-			// country_id, name, region_id			
-			int id = rs.getInt("Region_id");
-			String cid = rs.getString("Country_id");
-			String cname = rs.getString("Country_name");
-			
-			ar.addAll(ar);
+			// country_id, name, region_id
+			CountriesDTO countriesDTO = new CountriesDTO();
+			countriesDTO.setCountry_id(rs.getString("country_id"));
+			countriesDTO.setCountry_name(rs.getString("country_name"));
+			countriesDTO.setRegion_id(rs.getInt("region_id"));
+			ar.add(countriesDTO);
 
-//			System.out.println("Region_id" + "  " + "Country_id" + "  " + "Country_name");
-//			System.out.println(id + "\t\t" + cid + "\t" + cname);
+			// System.out.println("Region_id" + " " + "Country_id" + " " + "Country_name");
+			// System.out.println(id + "\t\t" + cid + "\t" + cname);
 		}
 		// 6. 자원해제
 		DBConnetor_login.disConnect(rs, st, con);
+
+		return ar;
 	}
 
 	// getDetail : countries_id

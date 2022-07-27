@@ -32,7 +32,7 @@ public class TestMain
 			// cd.getDetail("AU");
 //			regionsDTO = rd.getDetail(2);
 //			regionsView.view(regionsDTO);
-			RegionsDTO ar = rd.getList();
+			ArrayList<RegionsDTO> ar = rd.getList();
 			regionsView.view(ar);
 
 //			coutriesDTO = cd.getDetail("AU");

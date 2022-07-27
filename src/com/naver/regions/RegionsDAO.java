@@ -5,12 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.naver.countries.CountriesDTO;
 import com.naver.util.DBConnetor_login;
 
 public class RegionsDAO
 {
 	// 1. regions의 모든 데이터 가져오기
-	public RegionsDTO getList() throws Exception
+	public ArrayList<RegionsDTO> getList() throws Exception
 	{
 		// 1. DB연결 - 로그인
 		Connection con = DBConnetor_login.getConnection();
@@ -21,12 +22,15 @@ public class RegionsDAO
 		// 4. 최종 전송 후 결과를 처리
 		ResultSet rs = st.executeQuery();
 
-		RegionsDTO regionsDTO = null;
+		// RegionsDTO regionsDTO = null;
+		ArrayList<RegionsDTO> ar = new ArrayList();
 		while (rs.next())
 		{
+			RegionsDTO regionsDTO = new RegionsDTO();
 			regionsDTO = new RegionsDTO();
 			regionsDTO.setRegion_id(rs.getInt("Region_id"));
 			regionsDTO.setRegion_name(rs.getString("Region_name"));
+			ar.add(regionsDTO);
 			// int id = rs.getInt("Region_id");
 			// String name = rs.getString("Region_name");
 
@@ -36,7 +40,7 @@ public class RegionsDAO
 		// 6. 자원해제
 		DBConnetor_login.disConnect(rs, st, con);
 
-		return regionsDTO;
+		return ar;
 	}
 
 	// 2. regions에서 하나의 결과(row, 가로줄)
