@@ -9,24 +9,27 @@ import com.naver.util.DBConnetor_login;
 
 public class CountriesDAO
 {
-	public void getList() throws Exception
+	public void getList(String search) throws Exception
 	{
 		// 1. DB연결 - 로그인
 		Connection con = DBConnetor_login.getConnection();
 		// 2. DB 데이터 가져오기
-		String sql = "select * from countries";
+		String sql = "select * from countries where country_name like '%'||?||'%'"; // '%'||?||'%' -> 이렇게 하고 st.setString없어도 됨
+		// '%검색어%' 를 만들면 됨
 		// 3. Query문 미리 전송
 		PreparedStatement st = con.prepareStatement(sql);
+		// ? 있으면 세팅
+		st.setString(1, search); // -> '%'||?||'%' 안쓰면 search 앞뒤에 "%" 더하기
 		// 4. 최종 전송 후 결과를 처리
 		ResultSet rs = st.executeQuery();
 
 		while (rs.next())
 		{
 			// country_id, name, region_id
-			CountriesDTO countriesDTO = new CountriesDTO();
-			countriesDTO.setCountry_id(rs.getString("country_id"));
-			countriesDTO.setCountry_name(rs.getString("country_name"));
-			countriesDTO.setRegion_id(rs.getInt("region_id"));
+			CountriesDTO countriesDTO1 = new CountriesDTO();
+			countriesDTO1.setCountry_id(rs.getString("country_id"));
+			countriesDTO1.setCountry_name(rs.getString("country_name"));
+			countriesDTO1.setRegion_id(rs.getInt("region_id"));
 
 			// System.out.println("Region_id" + " " + "Country_id" + " " + "Country_name");
 			// System.out.println(id + "\t\t" + cid + "\t" + cname);

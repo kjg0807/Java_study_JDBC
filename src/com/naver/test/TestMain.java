@@ -19,18 +19,18 @@ public class TestMain
 	{
 		DBConnetor_login db = new DBConnetor_login();
 
-		RegionsDAO rd = new RegionsDAO();
+		RegionsDAO regionsDAO = new RegionsDAO();
 		RegionsDTO regionsDTO = new RegionsDTO();
 		RegionsView regionsView = new RegionsView();
 
-		CountriesDAO cd = new CountriesDAO();
+		CountriesDAO countriesDAO = new CountriesDAO();
 		CountriesDTO coutriesDTO = new CountriesDTO();
 		CountriesView coutriesView = new CountriesView();
 
 		EmployeDAO employeDAO = new EmployeDAO();
 		EmployeDTO employeDTO = new EmployeDTO();
 		EmployeView employeView = new EmployeView();
-		
+
 		try
 		{
 			// DBConnetor_login.getConnection();
@@ -42,12 +42,14 @@ public class TestMain
 
 			// ArrayList<RegionsDTO> ar = rd.getList();
 			// regionsView.view(ar);
+			ArrayList<RegionsDTO> ar = regionsDAO.getList();
+			regionsView.view(ar);
 
 			// coutriesDTO = cd.getDetail("AU");
 			// coutriesView.view(coutriesDTO);
-			
-			ArrayList<EmployeDTO> ar = employeDAO.getList();
-			employeView.view(ar);
+
+			// ArrayList<EmployeDTO> ar = employeDAO.getList();
+			// employeView.view(ar);
 		}
 		catch (Exception e)
 		{
