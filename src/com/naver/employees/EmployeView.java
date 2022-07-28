@@ -1,4 +1,4 @@
-package com.naver.employe;
+package com.naver.employees;
 
 public class EmployeView
 {
