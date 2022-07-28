@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.naver.regions.RegionsDTO;
 import com.naver.util.DBConnetor_login;
 
 public class CountriesDAO
@@ -73,5 +74,26 @@ public class CountriesDAO
 		DBConnetor_login.disConnect(rs, st, con);
 
 		return ar;
+	}
+
+	public int setCountry(CountriesDTO countriesDTO) throws Exception
+	{
+		// 1. DB연결 - 로그인
+		Connection con = DBConnetor_login.getConnection();
+		// 2. regions의 데이터 가져오기
+		String sql = "insert into countries values(?, ?, ?)";
+		// 3. Query문 미리 전송
+		PreparedStatement st = con.prepareStatement(sql);
+		// 4. ? 의 값 세팅
+		st.setString(1, countriesDTO.getCountry_id());
+		st.setString(2, countriesDTO.getCountry_name());
+		st.setInt(3, countriesDTO.getRegion_id());
+		// 5. 최종 전송 후 결과를 처리
+		int rs = st.executeUpdate();
+
+		// 6. 자원해제
+		DBConnetor_login.disConnect(st, con);
+
+		return rs;
 	}
 }

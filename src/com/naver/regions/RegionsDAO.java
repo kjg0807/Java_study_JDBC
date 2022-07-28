@@ -74,4 +74,25 @@ public class RegionsDAO
 
 		return regionsDTO;
 	}
+
+	// 3. Regions에 데이터 추가
+	public int setRegion(RegionsDTO regionsDTO) throws Exception
+	{
+		// 1. DB연결 - 로그인
+		Connection con = DBConnetor_login.getConnection();
+		// 2. regions의 데이터 가져오기
+		String sql = "insert into regions values(?, ?)"; // DB table - region_id, region_name
+		// 3. Query문 미리 전송
+		PreparedStatement st = con.prepareStatement(sql);
+		// 4. ? 의 값 세팅
+		st.setInt(1, regionsDTO.getRegion_id());
+		st.setString(2, regionsDTO.getRegion_name());
+		// 5. 최종 전송 후 결과를 처리
+		int rs = st.executeUpdate();
+
+		// 6. 자원해제
+		DBConnetor_login.disConnect(st, con);		
+		
+		return rs;
+	}
 }

@@ -19,7 +19,7 @@ public class CountriesDTO
 
 	public String getCountry_name()
 	{
-		return "%" + country_name + "%";
+		return country_name;
 	}
 
 	public void setCountry_name(String country_name)
