@@ -67,4 +67,32 @@ public class EmployeDAO
 		// 6. 자원처리
 		DBConnetor_login.disConnect(rs, st, con);
 	}
+
+	public void getJoinTest(EmployeDTO employeDTO) throws Exception
+	{
+		// 1. DB 연결
+		Connection con = DBConnetor_login.getConnection();
+		// 2. SQL문 작성
+		String sql = "select e.last_name, e.salary, d.department_name "
+				+ "from employees E "
+				+ "inner join departments d on e.department_id = d.department_id "
+				+ "where e.department_id = ? ";
+		// 3. 미리 전송
+		PreparedStatement st = con.prepareStatement(sql);
+		// 4. ?있으면 값 세팅
+		st.setInt(1, employeDTO.getEmployee_id());
+		// 5. 최종 전송 후 결과 처리
+		ResultSet rs = st.executeQuery();
+
+		if (rs.next())
+		{
+			employeDTO = new EmployeDTO();
+			employeDTO.setLast_name(rs.getString("LAST_NAME"));
+			employeDTO.setSalary(rs.getInt("SALARY"));
+			DepartmentDTO dt = new DepartmentDTO(); //DTO 만들고 입력 후 Arraylist에 담아서 한꺼번에 리턴
+			dt.setDepartment_name(rs.getString("department_name"));
+		}
+		// 6. 연결 해제
+		DBConnetor_login.disConnect(rs, st, con);
+	}
 }

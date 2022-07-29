@@ -70,9 +70,9 @@ public class TestMain
 			// ArrayList<RegionsDTO> ar = regionsDAO.getList();
 			// regionsView.view(ar);
 
-			coutriesDTO.setCountry_id("UA");
-			coutriesDTO.setCountry_name("UKRAINE");
-			coutriesDTO.setRegion_id(1);
+			coutriesDTO.setCountry_id("KH");
+			coutriesDTO.setCountry_name("CAMBODIA");
+			coutriesDTO.setRegion_id(7);
 			int result = countriesDAO.setCountry(coutriesDTO);
 			if (result > 0)
 			{
